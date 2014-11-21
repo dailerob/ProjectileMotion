@@ -80,7 +80,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         for (int x = 0; x < list.size(); x++) {
             for (int check = 0; check < list.size(); check++) {
                 if (check != x) {
-                    list.get(x).calcVec(list.get(check).getX(), list.get(check).getY(), list.get(check).getGravity());
+                    list.get(x).calcVec(list.get(check).getX(), list.get(check).getY(), list.get(check).getZ(), list.get(check).getGravity());
                 }
             }
         }
@@ -98,7 +98,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 on *= -1;
                 break;
             case 'A':keys[2] = true;
-                list.add(new PhysicsObject(600 + 450*on, 500, 0, 100*on, .2));
+                list.add(new PhysicsObject(600 + 450*on, 500,0, 0, 100*on, 100, .2));
                 on *= -1;
                 break;
             case 'M':keys[3] = true;break;
