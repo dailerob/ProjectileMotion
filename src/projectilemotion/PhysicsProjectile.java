@@ -29,6 +29,8 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 	private BufferedImage back;
         private int width;
         private int hight;
+        private double xradian; 
+        private double yradian;
 	int p1 = 0;
 	int p2 = 0;
 	double on = 1;
@@ -72,7 +74,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 
         //draws each projectile then moves them
         for (int x = 0; x < list.size(); x++) {
-            list.get(x).draw(graphToBack);
+            list.get(x).draw(graphToBack, xradian ,yradian);
             list.get(x).step(1000);
         }
 
@@ -91,31 +93,67 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     public void keyPressed(KeyEvent e) {
 
         switch (toUpperCase(e.getKeyChar())) {
-            case 'W':keys[0] = true;break;
+            case 'A':keys[0] = true;
+                decXradian();
+                break;
                 
-            case 'S':keys[1] = true;
-                list.add(new PhysicsObject(600 + 0 * on, 500, 0, 0 * on, 10));
+            case 'D':keys[3] = true;
+                incXradian();
+                break;
+                
+            case 'W':keys[0] = true;
+                decYradian();
+                break;
+                
+            case 'S':keys[3] = true;
+                incYradian();
+                
+                break;
+                 
+            case 'E':keys[1] = true;
+                list.add(new PhysicsObject(0 * on, 0, 0, 0 , 10 , WIDTH, HEIGHT));
                 on *= -1;
                 break;
-            case 'A':keys[2] = true;
-                list.add(new PhysicsObject(600 + 450*on, 500,0, 0, 100*on, 100, .2, 100));
+            case 'R':keys[2] = true;
+                list.add(new PhysicsObject(200*on, 0,0, 0, 100*on, 400 *on, .2, 500 , WIDTH, HEIGHT));
+                list.add(new PhysicsObject(200*on, 0,0, 0, 100*on, 400 *-on, .2, 500 , WIDTH, HEIGHT));
                 on *= -1;
                 break;
-            case 'M':keys[3] = true;break;
+            
         }
     }
 
     public void keyReleased(KeyEvent e) {
         switch (toUpperCase(e.getKeyChar())) {
+            case 'A':keys[0] = false;break;
+            case 'E':keys[1] = false;break;
+            case 'R':keys[2] = false;break;
+            case 'D':keys[3] = false;break;
             case 'W':keys[0] = false;break;
-            case 'Z':keys[1] = false;break;
-            case 'A':keys[2] = false;break;
-            case 'M':keys[3] = false;break;
+            case 'S':keys[1] = false;break;
         }
     }
 
     //has to be here for keyListener
     public void keyTyped(KeyEvent e) {
+    }
+    
+    public void incYradian() {
+        yradian+=.01;
+    }
+    
+    public void decYradian()
+    {
+        yradian-= .01;
+    }
+    
+    public void incXradian() {
+        xradian+=.01;
+    }
+    
+    public void decXradian()
+    {
+        xradian-= .01;
     }
 	
         
