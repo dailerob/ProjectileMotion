@@ -32,7 +32,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 	int p1 = 0;
 	int p2 = 0;
 	double on = 1;
-	Color t = new Color(255,255,255,2);
+	Color t = new Color(255,255,255,255);
 
 	public PhysicsProjectile(int width, int hight)
 	{
@@ -98,7 +98,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 on *= -1;
                 break;
             case 'A':keys[2] = true;
-                list.add(new PhysicsObject(600 + 450*on, 500,0, 0, 100*on, 100, .2));
+                list.add(new PhysicsObject(600 + 450*on, 500,0, 0, 100*on, 100, .2, 100));
                 on *= -1;
                 break;
             case 'M':keys[3] = true;break;

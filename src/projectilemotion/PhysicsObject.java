@@ -7,6 +7,7 @@ package projectilemotion;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 public class PhysicsObject {
 
@@ -17,6 +18,7 @@ public class PhysicsObject {
     private double ycom;
     private double zcom;
     private double gravity;
+    ArrayList<double[]> trail = new ArrayList<double[]>(); 
     Color c;
 
     public PhysicsObject(double xx, double yy, double xc, double yc, double g) {
@@ -25,23 +27,39 @@ public class PhysicsObject {
         xcom = xc;
         ycom = yc;
         gravity = g;
+        
+        for(int index = 0; index < 100; index++)
+        {
+            trail.add(new double[3]);
+        }
     }
 
-    public PhysicsObject(double xx, double yy, double zz, double xc, double yc, double zc, double g) {
+    public PhysicsObject(double xx, double yy, double zz, double xc, double yc, double zc, double g, int trailLength) {
         x = xx;
         y = yy;
         z = zz;
         xcom = xc;
         ycom = yc;
         zcom = zc;
+        
+        for(int index = 0; index < trailLength; index++)
+        {
+            trail.add(new double[3]);
+        }
     }
 
     public void draw(Graphics window) {
-        if ((500 * .1 * (Math.sqrt(xcom * xcom + ycom * ycom + zcom *zcom)) < 256)) {
-            c = new Color(0, 0, (int) (500 * .1 * (Math.sqrt(xcom * xcom + ycom * ycom + zcom * zcom))));
+        double blueness = 500 * .1 * Math.sqrt(xcom * xcom + ycom * ycom + zcom *zcom);
+        if(blueness > 255)
+            blueness = 255; 
+        
+        c = new Color(0, 0, (int) blueness);
+        
+        for(double [] index :trail)
+        {
+            window.setColor(c);
+            window.fillRect((int) (index[0]), (int) (index[1]), 1, 1);
         }
-        window.setColor(c);
-        window.fillRect((int) (x), (int) (y), 1, 1);
     }
 
     public void calcVec(double xx, double yy, double zz, double g) {
@@ -55,9 +73,7 @@ public class PhysicsObject {
         mag *= mag;
 
         xcom += dx / mag;
-        //util.sopl(ycom);
         ycom += dy / mag;
-        
         zcom += dz / mag;
     }
 
@@ -65,6 +81,25 @@ public class PhysicsObject {
         x += xcom / resolution;
         y += ycom / resolution;
         z += zcom / resolution; 
+        
+        stepTrail();
+    }
+    
+    private void stepTrail()
+    {
+        trail.get(0)[0] = x;
+        trail.get(0)[1] = y;
+        trail.get(0)[2] = z;
+        
+        for(int index = trail.size()-1; index > 0; index-- )
+        {
+            //if((int)trail.get(index)[0] != (int)trail.get(index-1)[0]);
+                trail.get(index)[0] = trail.get(index-1)[0];
+            //if((int)trail.get(index)[1] != (int)trail.get(index-1)[1]);
+                trail.get(index)[1] = trail.get(index-1)[1];
+           // if((int)trail.get(index)[2] != (int)trail.get(index-1)[2]);
+                trail.get(index)[2] = trail.get(index-1)[2];
+        }
     }
 
     public double getX() {
