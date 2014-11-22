@@ -62,18 +62,30 @@ public class PhysicsObject {
             blueness = 255; 
         
         c = new Color(0, 0, (int) blueness);
-        double ind = 100;
+        double ind = 255;
         for(double [] index :trail)
         {
-            ind --;
-            double [] temp = {Math.cos(xradian)*index[0]+Math.sin(xradian)*index[2],Math.cos(yradian)*index[1]+Math.sin(yradian)*index[2],index[2]};
+            double [] temp = yRotation(xRotation(index));
             temp[0] += 600;
             temp[1] += 500; 
             
-            //c = new Color(0, 0, (int) blueness, (int)(ind));
+            //ind*=.995;
             window.setColor(c);
             window.fillRect((int) (temp[0]), (int) (temp[1]), 1, 1);
         }
+    }
+    
+    
+    private double [] xRotation (double [] preRotation)
+    {
+        double [] rotated = {Math.cos(xradian)*preRotation[0]+Math.sin(xradian)*preRotation[2],preRotation[1],Math.cos(xradian)*preRotation[2]-Math.sin(xradian)*preRotation[0]};
+        return rotated;
+    }
+    
+    private double [] yRotation (double [] preRotation)
+    {
+        double [] rotated = {preRotation[0],Math.cos(yradian)*preRotation[1]+Math.sin(yradian)*preRotation[2],Math.sin(yradian)*preRotation[1]-Math.cos(yradian)*preRotation[2]};
+        return rotated;
     }
 
     public void calcVec(double xx, double yy, double zz, double g) {

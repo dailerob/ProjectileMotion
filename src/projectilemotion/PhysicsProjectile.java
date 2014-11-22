@@ -115,8 +115,8 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 on *= -1;
                 break;
             case 'R':keys[2] = true;
-                list.add(new PhysicsObject(200*on, 0,0, 0, 100*on, 400 *on, .2, 500 , WIDTH, HEIGHT));
-                list.add(new PhysicsObject(200*on, 0,0, 0, 100*on, 400 *-on, .2, 500 , WIDTH, HEIGHT));
+                list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *on, .2, 500 , WIDTH, HEIGHT));
+                list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *-on, .2, 500 , WIDTH, HEIGHT));
                 on *= -1;
                 break;
             
