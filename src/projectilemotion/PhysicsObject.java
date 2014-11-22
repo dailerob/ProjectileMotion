@@ -20,6 +20,7 @@ public class PhysicsObject {
     private double gravity;
     private double xradian;
     private double yradian; 
+    private double zradian;
     private double width; 
     private double height;
     ArrayList<double[]> trail = new ArrayList<double[]>(); 
@@ -54,9 +55,10 @@ public class PhysicsObject {
         }
     }
 
-    public void draw(Graphics window, double xradian, double yradian) {
+    public void draw(Graphics window, double xradian, double yradian, double zradian) {
         this.xradian = xradian;
         this.yradian = yradian;
+        this.zradian = zradian;
         double blueness = 500 * .1 * Math.sqrt(xcom * xcom + ycom * ycom + zcom *zcom);
         if(blueness > 255)
             blueness = 255; 
@@ -65,7 +67,7 @@ public class PhysicsObject {
         double ind = 255;
         for(double [] index :trail)
         {
-            double [] temp = yRotation(xRotation(index));
+            double [] temp = yRotation(xRotation(zRotation(index)));
             temp[0] += 600;
             temp[1] += 500; 
             
@@ -87,6 +89,13 @@ public class PhysicsObject {
         double [] rotated = {preRotation[0],Math.cos(yradian)*preRotation[1]+Math.sin(yradian)*preRotation[2],Math.sin(yradian)*preRotation[1]-Math.cos(yradian)*preRotation[2]};
         return rotated;
     }
+    
+    private double [] zRotation (double [] preRotation)
+    {
+        double [] rotated = {Math.cos(zradian)*preRotation[0]+Math.sin(zradian)*preRotation[1],Math.cos(zradian)*preRotation[1]-Math.sin(zradian)*preRotation[0],preRotation[2]};
+        return rotated;
+    }
+    
 
     public void calcVec(double xx, double yy, double zz, double g) {
         double dx = xx - x;

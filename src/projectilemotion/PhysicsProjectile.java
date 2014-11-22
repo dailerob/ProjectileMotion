@@ -31,10 +31,11 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         private int hight;
         private double xradian; 
         private double yradian;
+        private double zradian;
 	int p1 = 0;
 	int p2 = 0;
 	double on = 1;
-	Color t = new Color(255,255,255,255);
+	Color t = new Color(0,0,0,255);
 
 	public PhysicsProjectile(int width, int hight)
 	{
@@ -74,7 +75,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 
         //draws each projectile then moves them
         for (int x = 0; x < list.size(); x++) {
-            list.get(x).draw(graphToBack, xradian ,yradian);
+            list.get(x).draw(graphToBack, xradian ,yradian,zradian);
             list.get(x).step(1000);
         }
 
@@ -111,12 +112,17 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 break;
                  
             case 'E':keys[1] = true;
-                list.add(new PhysicsObject(0 * on, 0, 0, 0 , 10 , WIDTH, HEIGHT));
-                on *= -1;
+                incZradian();
                 break;
+                
+            case 'Q':keys[1] = true;
+                decZradian();
+                break;
+                
             case 'R':keys[2] = true;
                 list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *on, .2, 500 , WIDTH, HEIGHT));
                 list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *-on, .2, 500 , WIDTH, HEIGHT));
+                list.add(new PhysicsObject(0 * on, 0, 0, 0 , 10 , WIDTH, HEIGHT));
                 on *= -1;
                 break;
             
@@ -127,6 +133,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         switch (toUpperCase(e.getKeyChar())) {
             case 'A':keys[0] = false;break;
             case 'E':keys[1] = false;break;
+            case 'Q':keys[1] = false;break;
             case 'R':keys[2] = false;break;
             case 'D':keys[3] = false;break;
             case 'W':keys[0] = false;break;
@@ -154,6 +161,15 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     public void decXradian()
     {
         xradian-= .01;
+    }
+    
+    public void incZradian() {
+        zradian+=.01;
+    }
+    
+    public void decZradian()
+    {
+        zradian-= .01;
     }
 	
         
