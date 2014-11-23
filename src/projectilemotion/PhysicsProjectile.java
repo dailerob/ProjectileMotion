@@ -15,12 +15,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Canvas;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
-import java.awt.event.ActionListener;
 import java.util.Random;
 import java.util.PriorityQueue;
 
@@ -30,7 +28,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 	private boolean[] keys;
 	private BufferedImage back;
         private final int width;
-        private final int hight;
+        private final int height;
         private double xradian; 
         private double yradian;
         private double zradian;
@@ -43,7 +41,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 	{
             DrawRequest.initialize();
             this.width = width; 
-            this.hight = hight;
+            this.height = hight;
             keys = new boolean[4];
 
     
@@ -73,7 +71,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         Graphics graphToBack = back.createGraphics();
 
         graphToBack.setColor(t);
-        graphToBack.fillRect(0, 0, width, hight);
+        graphToBack.fillRect(0, 0, width, height);
 
         //draws each projectile then moves them
         for (int x = 0; x < list.size(); x++) {
@@ -87,6 +85,8 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
             }
 
         //adds the vector to each of the projectiles
+        
+        
         for (int x = 0; x < list.size(); x++) {
             for (int check = 0; check < list.size(); check++) {
                 if (check != x) {
@@ -131,9 +131,9 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 
             case 'R':keys[2] = true;
                 on *= -1;
-                list.add(new PhysicsObject(rand.nextDouble()*600*on, 0,0, 0, rand.nextGaussian()*100+900*on, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , WIDTH, HEIGHT));
-                list.add(new PhysicsObject(0, rand.nextDouble()*600*on,0, rand.nextGaussian()*100+900*-on, 0, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , WIDTH, HEIGHT));
-                list.add(new PhysicsObject(0 , 0, 0,0,0, 0 , 1 ,500, WIDTH, HEIGHT));
+                list.add(new PhysicsObject(rand.nextDouble()*600*on, 0,0, 0, rand.nextGaussian()*100+900*on, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
+                list.add(new PhysicsObject(0, rand.nextDouble()*600*on,0, rand.nextGaussian()*100+900*-on, 0, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
+                list.add(new PhysicsObject(0 , 0, 0,0,0, 0 , 1 ,500, width, height));
             
                 break;
             

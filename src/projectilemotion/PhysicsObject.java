@@ -21,8 +21,8 @@ public class PhysicsObject {
     private double xradian;
     private double yradian; 
     private double zradian;
-    private double width; 
-    private double height;
+    private final int width; 
+    private final int height;
     ArrayList<double[]> trail = new ArrayList<double[]>(); 
     Color c;
     Color [] colors = new Color [255];
@@ -92,14 +92,14 @@ public class PhysicsObject {
             double[] temp = yRotation(xRotation(zRotation(trail.get(index))));
             
             temp[2] = temp[2]*-1+600;
-            double d0 = 1200;
+            double d0 = width;
             double viewSize;
             viewSize = d0/(d0+2 *1/Math.atan(1.047)*temp[2]);
  
             temp[0]*= viewSize;
             temp[1]*= viewSize;
-            temp[0]+=600;
-            temp[1]+=500;
+            temp[0]+=width/2;
+            temp[1]+=height/2;
             ind--;
             PhysicsProjectile.drawMap.add(new DrawRequest(temp[0],temp[1],
                     temp[2],viewSize*10,(int)(254/(ind/25)) ));
