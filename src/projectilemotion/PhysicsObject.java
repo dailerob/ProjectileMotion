@@ -44,7 +44,7 @@ public class PhysicsObject {
         
         for(double index = 0; index <255; index ++)
         {
-            colors[(int)index] = new Color ((int)(index),255,255,(int)(index/2));
+            colors[(int)index] = new Color ((int)((index/255)*(index/255)*255),(int)(index),(int)(index));
         }
     }
 
@@ -64,7 +64,8 @@ public class PhysicsObject {
         
         for(double index = 0; index <255; index ++)
         {
-            colors[(int)index] = new Color ((int)(index),255,255,(int)(index/2));
+            //colors[(int)index] = new Color ((int)(index),255,255,(int)(index/2));
+            colors[(int)index] = new Color ((int)((index/255)*(index/255)*255),(int)(index),(int)(index));
         }
     }
 
