@@ -46,15 +46,15 @@ public class DrawRequest implements Comparable<DrawRequest> {
     public int compareTo(DrawRequest test)
     {
         if(zdepth<test.getZdepth())
-            return -1;
-        else
             return 1;
+        else
+            return -1;
     }
     
     public void draw (Graphics window)
     {
         window.setColor(colors[currentColor]);
-        window.fillRect((int) (x), (int) (y), (int)(size), (int)(size));
+        window.fillRect((int) (x), (int) (y), 1, 1);
         
     }
     

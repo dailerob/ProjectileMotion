@@ -41,11 +41,6 @@ public class PhysicsObject {
         {
             trail.add(new double[3]);
         }
-        
-        for(double index = 0; index <255; index ++)
-        {
-            colors[(int)index] = new Color ((int)((index/255)*(index/255)*255),(int)(index),(int)(index));
-        }
     }
 
     public PhysicsObject(double xx, double yy, double zz, double xc, double yc, double zc, double mass, int trailLength, int width, int hight) {
@@ -62,22 +57,13 @@ public class PhysicsObject {
         {
             trail.add(new double[3]);
         }
-        
-        for(double index = 0; index <255; index ++)
-        {
-            //colors[(int)index] = new Color ((int)(index),255,255,(int)(index/2));
-            colors[(int)index] = new Color ((int)((index/255)*(index/255)*255),(int)(index),(int)(index));
-        }
     }
 
     public void draw(Graphics window, double xradian, double yradian, double zradian) {
         this.xradian = xradian;
         this.yradian = yradian;
         this.zradian = zradian;
-        
-        //c = new Color((int)brightness,(int) brightness, 0);
-        
-        //c = new Color(0,255, 255);
+
         double ind = trail.size()+25;
         
         for (int index = trail.size()-1; index >=0 ; index--) {
@@ -102,8 +88,6 @@ public class PhysicsObject {
             zc =  xc * xc  * yc * yc ;
             zc *= 254;
             zc = Math.abs(zc);
-            //window.setColor(colors[(int)(254-ind/2)]);
-            window.setColor(colors[(int)(254/(ind/25))]);
 
             double[] temp = yRotation(xRotation(zRotation(trail.get(index))));
             
@@ -111,15 +95,14 @@ public class PhysicsObject {
             double d0 = 1200;
             double viewSize;
             viewSize = d0/(d0+2 *1/Math.atan(1.047)*temp[2]);
-            
+ 
             temp[0]*= viewSize;
             temp[1]*= viewSize;
             temp[0]+=600;
             temp[1]+=500;
             ind--;
-            //ind*=.995;
-            //if(temp[2]>0)
-            window.fillRect((int) (temp[0]), (int) (temp[1]), (int)(1), (int)(1));
+            PhysicsProjectile.drawMap.add(new DrawRequest(temp[0],temp[1],
+                    temp[2],viewSize*10,(int)(254/(ind/25)) ));
         }
     }
     
@@ -142,7 +125,9 @@ public class PhysicsObject {
     
     private double [] zRotation (double [] preRotation)
     {
-        double [] rotated = {Math.cos(zradian)*preRotation[0]+Math.sin(zradian)*preRotation[1],Math.cos(zradian)*preRotation[1]-Math.sin(zradian)*preRotation[0],preRotation[2]};
+        double [] rotated = {Math.cos(zradian)*preRotation[0]+Math.sin(zradian)
+                *preRotation[1],Math.cos(zradian)*preRotation[1]-
+                Math.sin(zradian)*preRotation[0],preRotation[2]};
         return rotated;
     }
     

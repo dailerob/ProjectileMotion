@@ -22,26 +22,26 @@ import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.util.PriorityQueue;
 
 public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 {
 	private ArrayList<PhysicsObject> list = new ArrayList<PhysicsObject>();
 	private boolean[] keys;
 	private BufferedImage back;
-        private int width;
-        private int hight;
+        private final int width;
+        private final int hight;
         private double xradian; 
         private double yradian;
         private double zradian;
-	int p1 = 0;
-	int p2 = 0;
+        public static PriorityQueue<DrawRequest> drawMap =  new PriorityQueue<DrawRequest>();
 	double on = 1;
         Random rand = new Random();
 	Color t = new Color(0,0,0,255);
 
 	public PhysicsProjectile(int width, int hight)
 	{
-            
+            DrawRequest.initialize();
             this.width = width; 
             this.hight = hight;
             keys = new boolean[4];
@@ -81,6 +81,11 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
             list.get(x).step(1000);
         }
 
+        while(drawMap.size()>0)
+            {
+                drawMap.poll().draw(graphToBack);
+            }
+
         //adds the vector to each of the projectiles
         for (int x = 0; x < list.size(); x++) {
             for (int check = 0; check < list.size(); check++) {
@@ -94,7 +99,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         }
         
         twoDGraph.drawImage(back, null, 0, 0);
-    }
+    }//paint
 
     public void keyPressed(KeyEvent e) {
 
@@ -125,9 +130,6 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 break;
                 
             case 'R':keys[2] = true;
-                //list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *on, .2, 500 , WIDTH, HEIGHT));
-                //list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *-on, .2, 500 , WIDTH, HEIGHT));
-                //list.add(new PhysicsObject(0 * on, 0, 0, 0 , 10 , WIDTH, HEIGHT));
                 on *= -1;
                 list.add(new PhysicsObject(rand.nextDouble()*600*on, 0,0, 0, rand.nextGaussian()*100+900*on, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , WIDTH, HEIGHT));
                 list.add(new PhysicsObject(0, rand.nextDouble()*600*on,0, rand.nextGaussian()*100+900*-on, 0, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , WIDTH, HEIGHT));
@@ -136,7 +138,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 break;
             
         }
-    }
+    }//keyPressed
 
     public void keyReleased(KeyEvent e) {
         switch (toUpperCase(e.getKeyChar())) {
@@ -148,7 +150,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
             case 'W':keys[0] = false;break;
             case 'S':keys[1] = false;break;
         }
-    }
+    }//keyReleased
 
     //has to be here for keyListener
     public void keyTyped(KeyEvent e) {
@@ -183,18 +185,14 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 	
         
 //voodoo majic right here
-   public void run()
-   {
-   	try
-   	{
-   		while(true)
-   		{
-   		   Thread.currentThread().sleep(0);
-            repaint();
-         }
-      }catch(Exception e)
-      {
-      }
-  	}	
-}
+   public void run() {
+        try {
+            while (true) {
+                Thread.currentThread().sleep(0);
+                repaint();
+            }
+        } catch (Exception e) {
+        }
+    }//run
+}//class Physics Projectile
 
