@@ -126,13 +126,17 @@ public class PhysicsObject {
     
     private double [] xRotation (double [] preRotation)
     {
-        double [] rotated = {Math.cos(xradian)*preRotation[0]+Math.sin(xradian)*preRotation[2],preRotation[1],Math.cos(xradian)*preRotation[2]-Math.sin(xradian)*preRotation[0]};
+        double [] rotated = {Math.cos(xradian)*preRotation[0]+Math.sin(xradian)
+                *preRotation[2],preRotation[1],Math.cos(xradian)*preRotation[2]
+                -Math.sin(xradian)*preRotation[0]};
         return rotated;
     }
     
     private double [] yRotation (double [] preRotation)
     {
-        double [] rotated = {preRotation[0],Math.cos(yradian)*preRotation[1]+Math.sin(yradian)*preRotation[2],Math.sin(yradian)*preRotation[1]-Math.cos(yradian)*preRotation[2]};
+        double [] rotated = {preRotation[0],Math.cos(yradian)*preRotation[1]
+                +Math.sin(yradian)*preRotation[2],Math.sin(yradian)
+                *preRotation[1]-Math.cos(yradian)*preRotation[2]};
         return rotated;
     }
     
