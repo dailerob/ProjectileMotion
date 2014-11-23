@@ -48,13 +48,14 @@ public class PhysicsObject {
         }
     }
 
-    public PhysicsObject(double xx, double yy, double zz, double xc, double yc, double zc, double g, int trailLength, int width, int hight) {
+    public PhysicsObject(double xx, double yy, double zz, double xc, double yc, double zc, double mass, int trailLength, int width, int hight) {
         x = xx;
         y = yy;
         z = zz;
         xcom = xc;
         ycom = yc;
         zcom = zc;
+        gravity = mass;
         this.width  = width;
         this.height = hight; 
         for(int index = 0; index < trailLength; index++)
@@ -134,7 +135,7 @@ public class PhysicsObject {
     }
     
 
-    public void calcVec(double xx, double yy, double zz, double g) {
+    public void calcVec(double xx, double yy, double zz, double mass) {
         double dx = xx - x;
         double dy = yy - y;
         double dz = zz - z;
@@ -142,7 +143,7 @@ public class PhysicsObject {
         double mult = mag;
         mult = Math.abs(mult);
         mag += 1;
-        mag *= mag /15;
+        mag *= mag /15/mass;
 
         xcom += dx / mag;
         ycom += dy / mag;
@@ -226,4 +227,10 @@ public class PhysicsObject {
     public double getGravity() {
         return gravity;
     }
+
+    public void setGravity(double gravity) {
+        this.gravity = gravity;
+    }
+    
+    
 }//physicsObject
