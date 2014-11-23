@@ -78,12 +78,12 @@ public class PhysicsObject {
         //c = new Color((int)brightness,(int) brightness, 0);
         
         //c = new Color(0,255, 255);
-        double ind = 25;
+        double ind = trail.size()+25;
         
-        for (double[] index : trail) {
-            double xc = 255 - Math.abs(index[0] / 3);
-            double yc = 255 - Math.abs(index[1] / 3);
-            double zc = 255 - Math.abs(index[2] / 3);
+        for (int index = trail.size()-1; index >=0 ; index--) {
+            double xc = 255 - Math.abs(trail.get(index)[0] / 3);
+            double yc = 255 - Math.abs(trail.get(index)[1] / 3);
+            double zc = 255 - Math.abs(trail.get(index)[2] / 3);
 
             if (xc < 0) {
                 xc = 0;
@@ -103,15 +103,23 @@ public class PhysicsObject {
             zc *= 254;
             zc = Math.abs(zc);
             //window.setColor(colors[(int)(254-ind/2)]);
-            window.setColor(colors[(int)(zc/(ind/25))]);
+            window.setColor(colors[(int)(254/(ind/25))]);
 
-            double[] temp = yRotation(xRotation(zRotation(index)));
-            temp[0] += 600;
-            temp[1] += 500;
-
-            ind++;
+            double[] temp = yRotation(xRotation(zRotation(trail.get(index))));
+            
+            temp[2] = temp[2]*-1+600;
+            double d0 = 1200;
+            double viewSize;
+            viewSize = d0/(d0+2 *1/Math.atan(1.047)*temp[2]);
+            
+            temp[0]*= viewSize;
+            temp[1]*= viewSize;
+            temp[0]+=600;
+            temp[1]+=500;
+            ind--;
             //ind*=.995;
-            window.fillRect((int) (temp[0]), (int) (temp[1]), 1, 1);
+            //if(temp[2]>0)
+            window.fillRect((int) (temp[0]), (int) (temp[1]), (int)(1), (int)(1));
         }
     }
     
@@ -135,19 +143,23 @@ public class PhysicsObject {
     }
     
 
-    public void calcVec(double xx, double yy, double zz, double mass) {
+    public boolean calcVec(double xx, double yy, double zz, double mass, double collisionDistance) {
         double dx = xx - x;
         double dy = yy - y;
         double dz = zz - z;
         double mag = Math.sqrt((dx * dx + dy * dy + dz * dz));
-        double mult = mag;
-        mult = Math.abs(mult);
+        if(mag<=collisionDistance)
+            return true;
+        
         mag += 1;
         mag *= mag /15/mass;
 
         xcom += dx / mag;
         ycom += dy / mag;
         zcom += dz / mag;
+        
+        return false;
+        
     }
 
     public void step(double resolution) {
@@ -232,5 +244,14 @@ public class PhysicsObject {
         this.gravity = gravity;
     }
     
-    
+    public void comineObjects(PhysicsObject collideWith)
+    {
+        double grav2 = collideWith.getGravity();
+        double xcom2 = collideWith.getXcom();
+        double ycom2 = collideWith.getXcom();
+        
+        xcom = (xcom*gravity+xcom2*grav2)/(gravity+grav2);
+        ycom = ((ycom*gravity+grav2*grav2)/2)/(gravity+grav2);
+        gravity+=collideWith.getGravity();
+    }
 }//physicsObject

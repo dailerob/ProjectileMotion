@@ -85,7 +85,10 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         for (int x = 0; x < list.size(); x++) {
             for (int check = 0; check < list.size(); check++) {
                 if (check != x) {
-                    list.get(x).calcVec(list.get(check).getX(), list.get(check).getY(), list.get(check).getZ(), list.get(check).getGravity());
+                    if(list.get(x).calcVec(list.get(check).getX(), list.get(check).getY(), list.get(check).getZ(), list.get(check).getGravity(),0)==true){
+                        list.get(check).comineObjects(list.get(x));
+                        list.remove(x);
+                    }    
                 }
             }
         }
