@@ -25,6 +25,9 @@ public class PhysicsObject {
     private double height;
     ArrayList<double[]> trail = new ArrayList<double[]>(); 
     Color c;
+    Color [] colors = new Color [255];
+   
+    
 
     public PhysicsObject(double xx, double yy, double xc, double yc, double g, int width, int height) {
         x = xx;
@@ -37,6 +40,11 @@ public class PhysicsObject {
         for(int index = 0; index < 100; index++)
         {
             trail.add(new double[3]);
+        }
+        
+        for(double index = 0; index <255; index ++)
+        {
+            colors[(int)index] = new Color ((int)(index),255,255,(int)(index/2));
         }
     }
 
@@ -53,26 +61,54 @@ public class PhysicsObject {
         {
             trail.add(new double[3]);
         }
+        
+        for(double index = 0; index <255; index ++)
+        {
+            colors[(int)index] = new Color ((int)(index),255,255,(int)(index/2));
+        }
     }
 
     public void draw(Graphics window, double xradian, double yradian, double zradian) {
         this.xradian = xradian;
         this.yradian = yradian;
         this.zradian = zradian;
-        double blueness = 500 * .1 * Math.sqrt(xcom * xcom + ycom * ycom + zcom *zcom);
-        if(blueness > 255)
-            blueness = 255; 
         
-        c = new Color(0, 0, (int) blueness);
-        double ind = 255;
-        for(double [] index :trail)
-        {
-            double [] temp = yRotation(xRotation(zRotation(index)));
+        //c = new Color((int)brightness,(int) brightness, 0);
+        
+        //c = new Color(0,255, 255);
+        double ind = 25;
+        
+        for (double[] index : trail) {
+            double xc = 255 - Math.abs(index[0] / 3);
+            double yc = 255 - Math.abs(index[1] / 3);
+            double zc = 255 - Math.abs(index[2] / 3);
+
+            if (xc < 0) {
+                xc = 0;
+            }
+            if (yc < 0) {
+                yc = 0;
+            }
+            if (zc < 0) {
+                zc = 0;
+            }
+
+            xc /= 255;
+            yc /= 255;
+            zc /= 255;
+
+            zc =  xc * xc  * yc * yc ;
+            zc *= 254;
+            zc = Math.abs(zc);
+            //window.setColor(colors[(int)(254-ind/2)]);
+            window.setColor(colors[(int)(zc/(ind/25))]);
+
+            double[] temp = yRotation(xRotation(zRotation(index)));
             temp[0] += 600;
-            temp[1] += 500; 
-            
+            temp[1] += 500;
+
+            ind++;
             //ind*=.995;
-            window.setColor(c);
             window.fillRect((int) (temp[0]), (int) (temp[1]), 1, 1);
         }
     }

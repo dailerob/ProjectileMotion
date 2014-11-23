@@ -21,6 +21,7 @@ import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 {
@@ -35,6 +36,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 	int p1 = 0;
 	int p2 = 0;
 	double on = 1;
+        Random rand = new Random();
 	Color t = new Color(0,0,0,255);
 
 	public PhysicsProjectile(int width, int hight)
@@ -120,10 +122,13 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 break;
                 
             case 'R':keys[2] = true;
-                list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *on, .2, 500 , WIDTH, HEIGHT));
-                list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *-on, .2, 500 , WIDTH, HEIGHT));
-                list.add(new PhysicsObject(0 * on, 0, 0, 0 , 10 , WIDTH, HEIGHT));
+                //list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *on, .2, 500 , WIDTH, HEIGHT));
+                //list.add(new PhysicsObject(400*on, 0,0, 0, 100*on, 250 *-on, .2, 500 , WIDTH, HEIGHT));
+                //list.add(new PhysicsObject(0 * on, 0, 0, 0 , 10 , WIDTH, HEIGHT));
                 on *= -1;
+                list.add(new PhysicsObject(rand.nextDouble()*400*on, 0,0, 0, rand.nextGaussian()*100+500*on, rand.nextGaussian()*150, .2, 500 , WIDTH, HEIGHT));
+                list.add(new PhysicsObject(0 * on, 0, 0, 0 , 10 , WIDTH, HEIGHT));
+            
                 break;
             
         }
