@@ -54,7 +54,7 @@ public class DrawRequest implements Comparable<DrawRequest> {
     public void draw (Graphics window)
     {
         window.setColor(colors[currentColor]);
-        window.fillRect((int) (x), (int) (y), 1, 1);
+        window.fillRect((int) (x), (int) (y),(int) 1,(int) 1);
         
     }
     

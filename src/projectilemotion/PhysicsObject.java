@@ -59,7 +59,7 @@ public class PhysicsObject {
         }
     }
 
-    public void draw(Graphics window, double xradian, double yradian, double zradian) {
+    public void draw(Graphics window, double xradian, double yradian, double zradian, double zoom) {
         this.xradian = xradian;
         this.yradian = yradian;
         this.zradian = zradian;
@@ -91,11 +91,12 @@ public class PhysicsObject {
 
             double[] temp = yRotation(xRotation(zRotation(trail.get(index))));
             
-            temp[2] = temp[2]*-1+600;
+            temp[2] = temp[2]*-1+width/2;
             double d0 = width;
             double viewSize;
-            viewSize = d0/(d0+2 *1/Math.atan(1.047)*temp[2]);
+            viewSize = d0/(d0+2 *1/Math.atan(1.047+zoom)*temp[2]);
  
+            
             temp[0]*= viewSize;
             temp[1]*= viewSize;
             temp[0]+=width/2;

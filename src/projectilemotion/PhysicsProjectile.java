@@ -32,6 +32,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         private double xradian; 
         private double yradian;
         private double zradian;
+        private double zoom;
         public static PriorityQueue<DrawRequest> drawMap =  new PriorityQueue<DrawRequest>();
 	double on = 1;
         Random rand = new Random();
@@ -75,7 +76,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 
         //draws each projectile then moves them
         for (int x = 0; x < list.size(); x++) {
-            list.get(x).draw(graphToBack, xradian ,yradian,zradian);
+            list.get(x).draw(graphToBack, xradian ,yradian,zradian,zoom);
             list.get(x).step(1000);
         }
 
@@ -131,11 +132,23 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 
             case 'R':keys[2] = true;
                 on *= -1;
-                list.add(new PhysicsObject(rand.nextDouble()*600*on, 0,0, 0, rand.nextGaussian()*100+900*on, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
-                list.add(new PhysicsObject(0, rand.nextDouble()*600*on,0, rand.nextGaussian()*100+900*-on, 0, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
+                list.add(new PhysicsObject(rand.nextDouble()*width/2*on, 0,0, 0, rand.nextGaussian()*100+1800*on, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
+                list.add(new PhysicsObject(0, rand.nextDouble()*width/2*on,0, rand.nextGaussian()*100+1800*-on, 0, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
                 list.add(new PhysicsObject(0 , 0, 0,0,0, 0 , 1 ,500, width, height));
+                
             
                 break;
+                
+            case 'T':
+                keys[1] = true;
+                incZoom();
+                break;
+
+            case 'G':
+                keys[1] = true;
+                decZoom();
+                break;
+  
             
         }
     }//keyPressed
@@ -149,6 +162,8 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
             case 'D':keys[3] = false;break;
             case 'W':keys[0] = false;break;
             case 'S':keys[1] = false;break;
+            case 'T':keys[0] = false;break;
+            case 'G':keys[1] = false;break;
         }
     }//keyReleased
 
@@ -181,6 +196,15 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     public void decZradian()
     {
         zradian-= .01;
+    }
+    
+    public void incZoom() {
+        zoom+=.01;
+    }
+    
+    public void decZoom()
+    {
+        zoom-= .01;
     }
 	
         
