@@ -18,9 +18,9 @@ public class PhysicsObject {
     private double yCom;
     private double zCom;
     private double mass;
-    private static double xradian;
-    private static double yradian;
-    private static double zradian;
+    private static double xRadian;
+    private static double yRadian;
+    private static double zRadian;
     private static int width;
     private static int height;
     int currentIndex = 0;
@@ -61,9 +61,9 @@ public class PhysicsObject {
     }
 
     public void draw(Graphics window, double xradian, double yradian, double zradian, double zoom) {
-        this.xradian = xradian;
-        this.yradian = yradian;
-        this.zradian = zradian;
+        this.xRadian = xradian;
+        this.yRadian = yradian;
+        this.zRadian = zradian;
 
         double ind = trail.size()+25;
         
@@ -110,38 +110,63 @@ public class PhysicsObject {
                     temp[2],viewSize*10,(int)(254/(ind/25)) ));
         }
     }
-    
-    
+
+
+    /**
+     *
+     * @param preRotation - the coordinates of the item before the roatation.
+     * @return - the coordinates of the item after the rotation about the xy plane.
+     */
     private double [] xRotation (double [] preRotation)
     {
-        double [] rotated = {Math.cos(xradian)*preRotation[0]+Math.sin(xradian)
-                *preRotation[2],preRotation[1],Math.cos(xradian)*preRotation[2]
-                -Math.sin(xradian)*preRotation[0]};
+        double [] rotated = {Math.cos(xRadian)*preRotation[0]+Math.sin(xRadian)
+                *preRotation[2],preRotation[1],Math.cos(xRadian)*preRotation[2]
+                -Math.sin(xRadian)*preRotation[0]};
         return rotated;
     }
-    
+
+    /**
+     *
+     * @param preRotation - the coordinates of the item before the roatation.
+     * @return - the coordinates of the item after the rotation about the yz plane.
+     */
     private double [] yRotation (double [] preRotation)
     {
-        double [] rotated = {preRotation[0],Math.cos(yradian)*preRotation[1]
-                +Math.sin(yradian)*preRotation[2],Math.sin(yradian)
-                *preRotation[1]-Math.cos(yradian)*preRotation[2]};
+        double [] rotated = {preRotation[0],Math.cos(yRadian)*preRotation[1]
+                +Math.sin(yRadian)*preRotation[2],Math.sin(yRadian)
+                *preRotation[1]-Math.cos(yRadian)*preRotation[2]};
         return rotated;
     }
-    
+
+    /**
+     *
+     * @param preRotation - the coordinates of the item before the roatation.
+     * @return - the coordinates of the item after the rotation about the xz plane.
+     */
     private double [] zRotation (double [] preRotation)
     {
-        double [] rotated = {Math.cos(zradian)*preRotation[0]+Math.sin(zradian)
-                *preRotation[1],Math.cos(zradian)*preRotation[1]-
-                Math.sin(zradian)*preRotation[0],preRotation[2]};
+        double [] rotated = {Math.cos(zRadian)*preRotation[0]+Math.sin(zRadian)
+                *preRotation[1],Math.cos(zRadian)*preRotation[1]-
+                Math.sin(zRadian)*preRotation[0],preRotation[2]};
         return rotated;
     }
-    
 
+
+    /**\
+     *
+     * @param xx - the x location of the particle exerting force on the current particle
+     * @param yy - the y location of the particle exerting force on the current particle
+     * @param zz - the z location of the particle exerting force on the current particle
+     * @param mass - the mass of the particle exerting force
+     * @param collisionDistance - the distance at which two particles might collide and combine
+     * @return boolean describing weather the particles collided
+     */
     public boolean calcVec(double xx, double yy, double zz, double mass, double collisionDistance) {
         double dx = xx - x;
         double dy = yy - y;
         double dz = zz - z;
         double mag = Math.sqrt((dx * dx + dy * dy + dz * dz));
+
         if(mag<=collisionDistance)
             return true;
         
@@ -153,9 +178,12 @@ public class PhysicsObject {
         zCom += dz / mag;
         
         return false;
-        
     }
 
+    /**
+     *
+     * @param resolution- the resolution of the vector approximations
+     */
     public void step(double resolution) {
         x += xCom / resolution;
         y += yCom / resolution;
@@ -163,7 +191,8 @@ public class PhysicsObject {
         
         stepTrail();
     }
-    
+
+    //please please plesase please fix this
     private void stepTrail()
     {
         //todo
@@ -177,6 +206,23 @@ public class PhysicsObject {
         trail.get(currentIndex)[1] = y;
         trail.get(currentIndex)[2] = z;
     }
+
+
+    /**
+     *
+     * @param collideWith- the particle being collided with.
+     */
+    public void combineObjects(PhysicsObject collideWith)
+    {
+        double grav2 = collideWith.getMass();
+        double xcom2 = collideWith.getxCom();
+        double ycom2 = collideWith.getyCom();
+
+        xCom = (xCom * mass +xcom2*grav2)/(mass +grav2);
+        yCom = ((yCom * mass +ycom2*grav2)/2)/(mass +grav2);
+        mass +=collideWith.getMass();
+    }
+
 
     public double getX() {
         return x;
@@ -227,7 +273,7 @@ public class PhysicsObject {
     }
 
     public double getYradian() {
-        return yradian;
+        return yRadian;
     }
     
     public double getMass() {
@@ -236,16 +282,5 @@ public class PhysicsObject {
 
     public void setMass(double mass) {
         this.mass = mass;
-    }
-    
-    public void combineObjects(PhysicsObject collideWith)
-    {
-        double grav2 = collideWith.getMass();
-        double xcom2 = collideWith.getxCom();
-        double ycom2 = collideWith.getxCom();
-        
-        xCom = (xCom * mass +xcom2*grav2)/(mass +grav2);
-        yCom = ((yCom * mass +grav2*grav2)/2)/(mass +grav2);
-        mass +=collideWith.getMass();
     }
 }//physicsObject
