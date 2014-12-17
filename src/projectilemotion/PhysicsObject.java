@@ -283,4 +283,4 @@ public class PhysicsObject {
     public void setMass(double mass) {
         this.mass = mass;
     }
-}//physicsObject
+}//class physicsObject

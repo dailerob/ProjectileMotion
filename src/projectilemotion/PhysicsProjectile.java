@@ -24,28 +24,27 @@ import java.util.PriorityQueue;
 
 public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 {
-	private ArrayList<PhysicsObject> list = new ArrayList<PhysicsObject>();
-	private boolean[] keys;
-	private BufferedImage back;
-        private final int width;
-        private final int height;
-        private double xradian; 
-        private double yradian;
-        private double zradian;
-        private double zoom;
-        public static PriorityQueue<DrawRequest> drawMap =  new PriorityQueue<DrawRequest>();
-	double on = 1;
-        Random rand = new Random();
-	Color t = new Color(0,0,0,255);
+    private ArrayList<PhysicsObject> list = new ArrayList<PhysicsObject>();
+    private boolean[] keys;
+    private BufferedImage back;
+    private final int width;
+    private final int height;
+    private double xRadian;
+    private double yRadian;
+    private double zRadian;
+    private double zoom;
+    public static PriorityQueue<DrawRequest> drawMap =  new PriorityQueue<DrawRequest>();
+    double on = 1;
+    Random rand = new Random();
+    Color backroundColor = new Color(0,0,0,255);
 
-
-    ///particle settings
-    double xcord;
-    double ycord;
-    double zcord;
-    double xcom;
-    double ycom;
-    double zcom;
+    ///particle settings variables
+    double xCord;
+    double yCord;
+    double zCord;
+    double xCom;
+    double yCom;
+    double zCom;
     double mass;
     int trailLength;
 
@@ -59,16 +58,13 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         keys = new boolean[4];
         setBackground(Color.WHITE);
         setVisible(true);
-
-
-
         new Thread(this).start();
         addKeyListener(this);		//starts the key thread to log key strokes
     }
-	
-   public void update(Graphics window){
-	   paint(window);
-   }
+
+    public void update(Graphics window){
+        paint(window);
+    }
 
     public void paint(Graphics window) {
         //set up the double buffering to make the game animation nice and smooth
@@ -84,34 +80,34 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         //we will draw all changes on the background image
         Graphics graphToBack = back.createGraphics();
 
-        graphToBack.setColor(t);
+        graphToBack.setColor(backroundColor);
         graphToBack.fillRect(0, 0, width, height);
 
         //draws each projectile then moves them
         for (int x = 0; x < list.size(); x++) {
-            list.get(x).draw(graphToBack, xradian ,yradian,zradian,zoom);
+            list.get(x).draw(graphToBack, xRadian, yRadian, zRadian,zoom);
             list.get(x).step(1000);
         }
 
         while(drawMap.size()>0)
-            {
-                drawMap.poll().draw(graphToBack);
-            }
+        {
+            drawMap.poll().draw(graphToBack);
+        }
 
         //adds the vector to each of the projectiles
-        
-        
+
+
         for (int x = 0; x < list.size(); x++) {
             for (int check = 0; check < list.size(); check++) {
                 if (check != x) {
                     if(list.get(x).calcVec(list.get(check).getX(), list.get(check).getY(), list.get(check).getZ(), list.get(check).getMass(),2)==true){
                         list.get(check).combineObjects(list.get(x));
                         list.remove(x);
-                    }    
+                    }
                 }
             }
         }
-        
+
         twoDGraph.drawImage(back, null, 0, 0);
     }//paint
 
@@ -121,46 +117,46 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
             case 'A':keys[0] = true;
                 decXradian();
                 break;
-                
+
             case 'D':keys[3] = true;
                 incXradian();
                 break;
-                
+
             case 'W':keys[0] = true;
                 decYradian();
                 break;
-                
+
             case 'S':keys[3] = true;
                 incYradian();
-                
+
                 break;
-                 
+
             case 'E':keys[1] = true;
                 incZradian();
                 break;
-                
+
             case 'Q':keys[1] = true;
                 decZradian();
                 break;
-                
+
             case 'R':keys[2] = true;
 
-                xcord = rand.nextGaussian()*width/2;
-                ycord = rand.nextGaussian()*height/2;
-                zcord = rand.nextGaussian()*height/2;
-                xcom = rand.nextGaussian()*10;
-                ycom = rand.nextGaussian()*10;
-                zcom = rand.nextGaussian()*10;
+                xCord = rand.nextGaussian()*width/2;
+                yCord = rand.nextGaussian()*height/2;
+                zCord = rand.nextGaussian()*height/2;
+                xCom = rand.nextGaussian()*10;
+                yCom = rand.nextGaussian()*10;
+                zCom = rand.nextGaussian()*10;
                 mass = 1;
                 trailLength = 500;
 
-                list.add(new PhysicsObject(xcord, ycord, zcord, xcom, ycom, zcom, mass, trailLength, width, height));
+                list.add(new PhysicsObject(xCord, yCord, zCord, xCom, yCom, zCom, mass, trailLength, width, height));
                 //list.add(new PhysicsObject(0, rand.nextDouble()*width/2*on,0, rand.nextGaussian()*100+1800*-on, 0, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
                 //list.add(new PhysicsObject(0 , 0, 0,0,0, 0 , 1 ,500, width, height));
-                
-            
+
+
                 break;
-                
+
             case 'T':
                 keys[1] = true;
                 incZoom();
@@ -170,8 +166,8 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 keys[1] = true;
                 decZoom();
                 break;
-  
-            
+
+
         }
     }//keyPressed
 
@@ -192,46 +188,46 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     //has to be here for keyListener
     public void keyTyped(KeyEvent e) {
     }
-    
+
     public void incYradian() {
-        yradian+=.01;
+        yRadian +=.01;
     }
-    
+
     public void decYradian()
     {
-        yradian-= .01;
+        yRadian -= .01;
     }
-    
+
     public void incXradian() {
-        xradian+=.01;
+        xRadian +=.01;
     }
-    
+
     public void decXradian()
     {
-        xradian-= .01;
+        xRadian -= .01;
     }
-    
+
     public void incZradian() {
-        zradian+=.01;
+        zRadian +=.01;
     }
-    
+
     public void decZradian()
     {
-        zradian-= .01;
+        zRadian -= .01;
     }
-    
+
     public void incZoom() {
         zoom+=.01;
     }
-    
+
     public void decZoom()
     {
         zoom-= .01;
     }
-	
-        
-//voodoo majic right here
-   public void run() {
+
+
+    //voodoo majic right here
+    public void run() {
         try {
             while (true) {
                 Thread.currentThread().sleep(0);
