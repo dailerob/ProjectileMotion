@@ -38,20 +38,33 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         Random rand = new Random();
 	Color t = new Color(0,0,0,255);
 
-	public PhysicsProjectile(int width, int hight)
-	{
-            DrawRequest.initialize();
-            this.width = width; 
-            this.height = hight;
-            keys = new boolean[4];
 
-    
-                setBackground(Color.WHITE);
-		setVisible(true);
-		
-		new Thread(this).start();
-		addKeyListener(this);		//starts the key thread to log key strokes
-	}
+    ///particle settings
+    double xcord;
+    double ycord;
+    double zcord;
+    double xcom;
+    double ycom;
+    double zcom;
+    double mass;
+    int trailLength;
+
+
+
+    public PhysicsProjectile(int width, int hieght)
+    {
+        DrawRequest.initialize();
+        this.width = width;
+        this.height = hieght;
+        keys = new boolean[4];
+        setBackground(Color.WHITE);
+        setVisible(true);
+
+
+
+        new Thread(this).start();
+        addKeyListener(this);		//starts the key thread to log key strokes
+    }
 	
    public void update(Graphics window){
 	   paint(window);
@@ -91,8 +104,8 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         for (int x = 0; x < list.size(); x++) {
             for (int check = 0; check < list.size(); check++) {
                 if (check != x) {
-                    if(list.get(x).calcVec(list.get(check).getX(), list.get(check).getY(), list.get(check).getZ(), list.get(check).getGravity(),0)==true){
-                        list.get(check).comineObjects(list.get(x));
+                    if(list.get(x).calcVec(list.get(check).getX(), list.get(check).getY(), list.get(check).getZ(), list.get(check).getMass(),2)==true){
+                        list.get(check).combineObjects(list.get(x));
                         list.remove(x);
                     }    
                 }
@@ -131,10 +144,19 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 break;
                 
             case 'R':keys[2] = true;
-                on *= -1;
-                list.add(new PhysicsObject(rand.nextDouble()*width/2*on, 0,0, 0, rand.nextGaussian()*100+1800*on, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
-                list.add(new PhysicsObject(0, rand.nextDouble()*width/2*on,0, rand.nextGaussian()*100+1800*-on, 0, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
-                list.add(new PhysicsObject(0 , 0, 0,0,0, 0 , 1 ,500, width, height));
+
+                xcord = rand.nextGaussian()*width/2;
+                ycord = rand.nextGaussian()*height/2;
+                zcord = rand.nextGaussian()*height/2;
+                xcom = rand.nextGaussian()*10;
+                ycom = rand.nextGaussian()*10;
+                zcom = rand.nextGaussian()*10;
+                mass = 1;
+                trailLength = 500;
+
+                list.add(new PhysicsObject(xcord, ycord, zcord, xcom, ycom, zcom, mass, trailLength, width, height));
+                //list.add(new PhysicsObject(0, rand.nextDouble()*width/2*on,0, rand.nextGaussian()*100+1800*-on, 0, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
+                //list.add(new PhysicsObject(0 , 0, 0,0,0, 0 , 1 ,500, width, height));
                 
             
                 break;

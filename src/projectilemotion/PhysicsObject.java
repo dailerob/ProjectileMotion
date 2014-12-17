@@ -14,27 +14,28 @@ public class PhysicsObject {
     private double x;
     private double y;
     private double z;
-    private double xcom;
-    private double ycom;
-    private double zcom;
-    private double gravity;
-    private double xradian;
-    private double yradian; 
-    private double zradian;
-    private final int width; 
-    private final int height;
-    ArrayList<double[]> trail = new ArrayList<double[]>(); 
+    private double xCom;
+    private double yCom;
+    private double zCom;
+    private double mass;
+    private static double xradian;
+    private static double yradian;
+    private static double zradian;
+    private static int width;
+    private static int height;
+    int currentIndex = 0;
+    ArrayList<double[]> trail = new ArrayList<double[]>();
     Color c;
     Color [] colors = new Color [255];
    
     
 
-    public PhysicsObject(double xx, double yy, double xc, double yc, double g, int width, int height) {
-        x = xx;
-        y = yy;
-        xcom = xc;
-        ycom = yc;
-        gravity = g;
+    public PhysicsObject(double x, double y, double xCom, double yCom, double g, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.xCom = xCom;
+        this.yCom = yCom;
+        mass = g;
         this.width  = width;
         this.height = height; 
         for(int index = 0; index < 100; index++)
@@ -43,14 +44,14 @@ public class PhysicsObject {
         }
     }
 
-    public PhysicsObject(double xx, double yy, double zz, double xc, double yc, double zc, double mass, int trailLength, int width, int hight) {
-        x = xx;
-        y = yy;
-        z = zz;
-        xcom = xc;
-        ycom = yc;
-        zcom = zc;
-        gravity = mass;
+    public PhysicsObject(double x, double y, double z, double xCom, double yCom, double zCom, double mass, int trailLength, int width, int hight) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.xCom = xCom;
+        this.yCom = yCom;
+        this.zCom = zCom;
+        this.mass = mass;
         this.width  = width;
         this.height = hight; 
         for(int index = 0; index < trailLength; index++)
@@ -90,18 +91,21 @@ public class PhysicsObject {
             zc = Math.abs(zc);
 
             double[] temp = yRotation(xRotation(zRotation(trail.get(index))));
+            //double [] temp  = trail.get(index).clone();
             
             temp[2] = temp[2]*-1+width/2;
             double d0 = width;
             double viewSize;
-            viewSize = d0/(d0+2 *1/Math.atan(1.047+zoom)*temp[2]);
+            viewSize = d0/(d0+2/Math.atan(1.047+zoom)*temp[2]);
  
-            
+            viewSize = 1;
             temp[0]*= viewSize;
             temp[1]*= viewSize;
             temp[0]+=width/2;
             temp[1]+=height/2;
-            ind--;
+                ind--;
+
+
             PhysicsProjectile.drawMap.add(new DrawRequest(temp[0],temp[1],
                     temp[2],viewSize*10,(int)(254/(ind/25)) ));
         }
@@ -144,34 +148,34 @@ public class PhysicsObject {
         mag += 1;
         mag *= mag /15/mass;
 
-        xcom += dx / mag;
-        ycom += dy / mag;
-        zcom += dz / mag;
+        xCom += dx / mag;
+        yCom += dy / mag;
+        zCom += dz / mag;
         
         return false;
         
     }
 
     public void step(double resolution) {
-        x += xcom / resolution;
-        y += ycom / resolution;
-        z += zcom / resolution; 
+        x += xCom / resolution;
+        y += yCom / resolution;
+        z += zCom / resolution;
         
         stepTrail();
     }
     
     private void stepTrail()
     {
-        trail.get(0)[0] = x;
-        trail.get(0)[1] = y;
-        trail.get(0)[2] = z;
-        
-        for(int index = trail.size()-1; index > 0; index-- )
-        {
-            trail.get(index)[0] = trail.get(index-1)[0];
-            trail.get(index)[1] = trail.get(index-1)[1];
-            trail.get(index)[2] = trail.get(index-1)[2];
-        }
+        //todo
+
+
+        if(currentIndex<trail.size()-1)
+            currentIndex++;
+        else
+            currentIndex = 0;
+        trail.get(currentIndex)[0] = x;
+        trail.get(currentIndex)[1] = y;
+        trail.get(currentIndex)[2] = z;
     }
 
     public double getX() {
@@ -190,20 +194,20 @@ public class PhysicsObject {
         this.y = y;
     }
 
-    public double getXcom() {
-        return xcom;
+    public double getxCom() {
+        return xCom;
     }
 
-    public void setXcom(double xcom) {
-        this.xcom = xcom;
+    public void setxCom(double xCom) {
+        this.xCom = xCom;
     }
 
-    public double getYcom() {
-        return ycom;
+    public double getyCom() {
+        return yCom;
     }
 
-    public void setYcom(double ycom) {
-        this.ycom = ycom;
+    public void setyCom(double yCom) {
+        this.yCom = yCom;
     }
 
     public double getZ() {
@@ -214,34 +218,34 @@ public class PhysicsObject {
         this.z = z;
     }
 
-    public double getZcom() {
-        return zcom;
+    public double getzCom() {
+        return zCom;
     }
 
-    public void setZcom(double zcom) {
-        this.zcom = zcom;
+    public void setzCom(double zCom) {
+        this.zCom = zCom;
     }
 
     public double getYradian() {
         return yradian;
     }
     
-    public double getGravity() {
-        return gravity;
+    public double getMass() {
+        return mass;
     }
 
-    public void setGravity(double gravity) {
-        this.gravity = gravity;
+    public void setMass(double mass) {
+        this.mass = mass;
     }
     
-    public void comineObjects(PhysicsObject collideWith)
+    public void combineObjects(PhysicsObject collideWith)
     {
-        double grav2 = collideWith.getGravity();
-        double xcom2 = collideWith.getXcom();
-        double ycom2 = collideWith.getXcom();
+        double grav2 = collideWith.getMass();
+        double xcom2 = collideWith.getxCom();
+        double ycom2 = collideWith.getxCom();
         
-        xcom = (xcom*gravity+xcom2*grav2)/(gravity+grav2);
-        ycom = ((ycom*gravity+grav2*grav2)/2)/(gravity+grav2);
-        gravity+=collideWith.getGravity();
+        xCom = (xCom * mass +xcom2*grav2)/(mass +grav2);
+        yCom = ((yCom * mass +grav2*grav2)/2)/(mass +grav2);
+        mass +=collideWith.getMass();
     }
 }//physicsObject
