@@ -19,6 +19,7 @@ public class PhysicsObject implements DrawPoint{
     private double yCom;
     private double zCom;
     private double mass;
+    private static double trailLength;
     private static double xRadian;
     private static double yRadian;
     private static double zRadian;
@@ -55,7 +56,8 @@ public class PhysicsObject implements DrawPoint{
         this.zCom = zCom;
         this.mass = mass;
         this.width  = width;
-        this.height = hight; 
+        this.height = hight;
+        this.trailLength = trailLength;
         for(int index = 0; index < trailLength; index++)
         {
             trail.add(new double[3]);
@@ -187,6 +189,15 @@ public class PhysicsObject implements DrawPoint{
      * @param resolution- the resolution of the vector approximations
      */
     public void step(double resolution) {
+
+        if(trail2.size()<trailLength)
+        {
+            trail2.push(new TrailParticle(x,y,z,c,width, height));
+        }
+        else{
+            trail2.push(trail2.pollLast());
+        }
+
         x += xCom / resolution;
         y += yCom / resolution;
         z += zCom / resolution;

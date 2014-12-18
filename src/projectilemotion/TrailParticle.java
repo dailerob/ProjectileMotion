@@ -19,7 +19,7 @@ public class TrailParticle implements DrawPoint{
     private int height;
     private Color c;
 
-    public TrailParticle (int x, int y, int z, Color c, int width, int height)
+    public TrailParticle (double x, double y, double z, Color c, int width, int height)
     {
         this.x = x;
         this.y = y;

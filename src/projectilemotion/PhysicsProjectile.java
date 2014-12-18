@@ -34,6 +34,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     private double zRadian;
     private double zoom;
     public static PriorityQueue<DrawRequest> drawMap =  new PriorityQueue<DrawRequest>();
+    public static PriorityQueue<DrawPoint> depthMap = new PriorityQueue<DrawPoint>();
     double on = 1;
     Random rand = new Random();
     Color backroundColor = new Color(0,0,0,255);
@@ -83,11 +84,27 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         graphToBack.setColor(backroundColor);
         graphToBack.fillRect(0, 0, width, height);
 
-        //draws each projectile then moves them
+
+
+
+
+        //adds the drawRequests for eacht of the particles
         for (int x = 0; x < list.size(); x++) {
             list.get(x).draw(graphToBack, xRadian, yRadian, zRadian,zoom);
             list.get(x).step(1000);
         }
+
+        for(int x = 0; x< list.size(); x++)
+        {
+            depthMap.add(list.get(x));
+            list.get(x).step(1000);
+        }
+
+        while(depthMap.size()>0)
+        {
+            depthMap.poll().draw(graphToBack,xRadian,yRadian,zRadian,zoom);
+        }
+
 
         while(drawMap.size()>0)
         {

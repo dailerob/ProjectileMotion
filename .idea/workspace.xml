@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96991931-fd16-4269-84a0-89ade341cca6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/projectilemotion/TrailParticle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/projectilemotion/DrawPoint.java" afterPath="$PROJECT_DIR$/src/projectilemotion/DrawPoint.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/projectilemotion/PhysicsObject.java" afterPath="$PROJECT_DIR$/src/projectilemotion/PhysicsObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/projectilemotion/PhysicsProjectile.java" afterPath="$PROJECT_DIR$/src/projectilemotion/PhysicsProjectile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/projectilemotion/TrailParticle.java" afterPath="$PROJECT_DIR$/src/projectilemotion/TrailParticle.java" />
     </list>
     <ignored path="ProjectileMotion.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,26 +39,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PhysicsProjectile.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PhysicsProjectile.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/projectilemotion/PhysicsProjectile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="3553">
-              <caret line="91" column="31" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
-              <folding />
+            <state vertical-scroll-proportion="0.30330673" vertical-offset="1009" max-vertical-offset="3842">
+              <caret line="91" column="47" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
+              <folding>
+                <element signature="e#1029#1042#0" expanded="true" />
+                <element signature="e#1117#1128#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PhysicsObject.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PhysicsObject.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/projectilemotion/PhysicsObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.852809" vertical-offset="357" max-vertical-offset="2720">
-              <caret line="231" column="12" selection-start-line="231" selection-start-column="12" selection-end-line="231" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1184" max-vertical-offset="3434">
+              <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#840#855#0" expanded="true" />
+                <element signature="e#879#894#0" expanded="true" />
                 <element signature="method#PhysicsObject#0;class#PhysicsObject#0" expanded="false" />
-                <element signature="method#PhysicsObject#1;class#PhysicsObject#0" expanded="false" />
                 <element signature="docComment;method#xRotation#0;class#PhysicsObject#0" expanded="false" />
                 <element signature="method#xRotation#0;class#PhysicsObject#0" expanded="false" />
                 <element signature="docComment;method#yRotation#0;class#PhysicsObject#0" expanded="false" />
@@ -69,8 +70,6 @@
                 <element signature="docComment;method#calcVec#0;class#PhysicsObject#0" expanded="false" />
                 <element signature="method#calcVec#0;class#PhysicsObject#0" expanded="false" />
                 <element signature="docComment;method#step#0;class#PhysicsObject#0" expanded="false" />
-                <element signature="method#step#0;class#PhysicsObject#0" expanded="false" />
-                <element signature="method#stepTrail#0;class#PhysicsObject#0" expanded="false" />
                 <element signature="docComment;method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
                 <element signature="method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
               </folding>
@@ -92,11 +91,11 @@
         <entry file="file://$PROJECT_DIR$/src/projectilemotion/TrailParticle.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="986">
-              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+              <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#891#892#0" expanded="true" />
-                <element signature="e#926#927#0" expanded="true" />
+                <element signature="e#900#901#0" expanded="true" />
+                <element signature="e#935#936#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -130,10 +129,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/projectilemotion/PhysicsProjectile.java" />
-        <option value="$PROJECT_DIR$/src/projectilemotion/PhysicsObject.java" />
         <option value="$PROJECT_DIR$/src/projectilemotion/DrawPoint.java" />
         <option value="$PROJECT_DIR$/src/projectilemotion/TrailParticle.java" />
+        <option value="$PROJECT_DIR$/src/projectilemotion/PhysicsObject.java" />
+        <option value="$PROJECT_DIR$/src/projectilemotion/PhysicsProjectile.java" />
       </list>
     </option>
   </component>
@@ -430,7 +429,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="1" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -480,7 +479,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="25" />
+      <option name="time" value="26" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -508,7 +507,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="3553">
           <caret line="91" column="31" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
-          <folding />
+          <folding>
+            <element signature="e#1029#1042#0" expanded="true" />
+            <element signature="e#1117#1128#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -518,9 +520,8 @@
           <caret line="285" column="9" selection-start-line="285" selection-start-column="9" selection-end-line="285" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#840#855#0" expanded="true" />
+            <element signature="e#879#894#0" expanded="true" />
             <element signature="method#PhysicsObject#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#PhysicsObject#1;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#yRotation#0;class#PhysicsObject#0" expanded="false" />
@@ -530,8 +531,6 @@
             <element signature="docComment;method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#stepTrail#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
           </folding>
@@ -574,7 +573,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3604">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1029#1042#0" expanded="true" />
+            <element signature="e#1117#1128#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -584,9 +586,8 @@
           <caret line="285" column="9" selection-start-line="285" selection-start-column="9" selection-end-line="285" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#840#855#0" expanded="true" />
+            <element signature="e#879#894#0" expanded="true" />
             <element signature="method#PhysicsObject#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#PhysicsObject#1;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#yRotation#0;class#PhysicsObject#0" expanded="false" />
@@ -596,8 +597,6 @@
             <element signature="docComment;method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#stepTrail#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
           </folding>
@@ -632,7 +631,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="3638">
           <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1029#1042#0" expanded="true" />
+            <element signature="e#1117#1128#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -642,9 +644,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#840#855#0" expanded="true" />
+            <element signature="e#879#894#0" expanded="true" />
             <element signature="method#PhysicsObject#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#PhysicsObject#1;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#yRotation#0;class#PhysicsObject#0" expanded="false" />
@@ -654,8 +655,6 @@
             <element signature="docComment;method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#stepTrail#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
           </folding>
@@ -690,7 +689,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="960" max-vertical-offset="3638">
           <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1029#1042#0" expanded="true" />
+            <element signature="e#1117#1128#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -700,9 +702,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#840#855#0" expanded="true" />
+            <element signature="e#879#894#0" expanded="true" />
             <element signature="method#PhysicsObject#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#PhysicsObject#1;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#yRotation#0;class#PhysicsObject#0" expanded="false" />
@@ -712,8 +713,6 @@
             <element signature="docComment;method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#stepTrail#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
           </folding>
@@ -748,7 +747,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="960" max-vertical-offset="3638">
           <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1029#1042#0" expanded="true" />
+            <element signature="e#1117#1128#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -758,9 +760,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#840#855#0" expanded="true" />
+            <element signature="e#879#894#0" expanded="true" />
             <element signature="method#PhysicsObject#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#PhysicsObject#1;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#yRotation#0;class#PhysicsObject#0" expanded="false" />
@@ -770,8 +771,6 @@
             <element signature="docComment;method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#stepTrail#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
           </folding>
@@ -806,7 +805,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1547" max-vertical-offset="3264">
           <caret line="107" column="33" selection-start-line="107" selection-start-column="31" selection-end-line="107" selection-end-column="33" />
-          <folding />
+          <folding>
+            <element signature="e#1029#1042#0" expanded="true" />
+            <element signature="e#1117#1128#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -816,9 +818,8 @@
           <caret line="91" column="12" selection-start-line="91" selection-start-column="12" selection-end-line="91" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#840#855#0" expanded="true" />
+            <element signature="e#879#894#0" expanded="true" />
             <element signature="method#PhysicsObject#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#PhysicsObject#1;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#yRotation#0;class#PhysicsObject#0" expanded="false" />
@@ -828,8 +829,6 @@
             <element signature="docComment;method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#stepTrail#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
           </folding>
@@ -864,7 +863,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1410" max-vertical-offset="3298">
           <caret line="107" column="33" selection-start-line="107" selection-start-column="31" selection-end-line="107" selection-end-column="33" />
-          <folding />
+          <folding>
+            <element signature="e#1029#1042#0" expanded="true" />
+            <element signature="e#1117#1128#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -874,9 +876,8 @@
           <caret line="91" column="12" selection-start-line="91" selection-start-column="12" selection-end-line="91" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#840#855#0" expanded="true" />
+            <element signature="e#879#894#0" expanded="true" />
             <element signature="method#PhysicsObject#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#PhysicsObject#1;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#yRotation#0;class#PhysicsObject#0" expanded="false" />
@@ -886,8 +887,6 @@
             <element signature="docComment;method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#stepTrail#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
           </folding>
@@ -918,14 +917,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/projectilemotion/PhysicsProjectile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="3553">
-          <caret line="91" column="31" selection-start-line="91" selection-start-column="31" selection-end-line="91" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/projectilemotion/ProjectileMotion.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
@@ -942,6 +933,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/projectilemotion/TrailParticle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="986">
+          <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#900#901#0" expanded="true" />
+            <element signature="e#935#936#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/projectilemotion/DrawPoint.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
@@ -950,27 +953,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/projectilemotion/TrailParticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="986">
-          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#891#892#0" expanded="true" />
-            <element signature="e#926#927#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/projectilemotion/PhysicsObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.852809" vertical-offset="357" max-vertical-offset="2720">
-          <caret line="231" column="12" selection-start-line="231" selection-start-column="12" selection-end-line="231" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1745" max-vertical-offset="3434">
+          <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#840#855#0" expanded="true" />
+            <element signature="e#879#894#0" expanded="true" />
             <element signature="method#PhysicsObject#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#PhysicsObject#1;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#xRotation#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#yRotation#0;class#PhysicsObject#0" expanded="false" />
@@ -980,10 +970,19 @@
             <element signature="docComment;method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#calcVec#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#step#0;class#PhysicsObject#0" expanded="false" />
-            <element signature="method#stepTrail#0;class#PhysicsObject#0" expanded="false" />
             <element signature="docComment;method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
             <element signature="method#combineObjects#0;class#PhysicsObject#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/projectilemotion/PhysicsProjectile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30330673" vertical-offset="1009" max-vertical-offset="3842">
+          <caret line="91" column="47" selection-start-line="91" selection-start-column="47" selection-end-line="91" selection-end-column="47" />
+          <folding>
+            <element signature="e#1029#1042#0" expanded="true" />
+            <element signature="e#1117#1128#0" expanded="true" />
           </folding>
         </state>
       </provider>
