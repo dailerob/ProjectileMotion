@@ -94,8 +94,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
             drawMap.poll().draw(graphToBack);
         }
 
-        //adds the vector to each of the projectiles
-
+        //adds the forces of each of the particles onto eachother.
 
         for (int x = 0; x < list.size(); x++) {
             for (int check = 0; check < list.size(); check++) {
