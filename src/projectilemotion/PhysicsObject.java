@@ -8,8 +8,9 @@ package projectilemotion;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
-public class PhysicsObject {
+public class PhysicsObject implements DrawPoint{
 
     private double x;
     private double y;
@@ -25,6 +26,7 @@ public class PhysicsObject {
     private static int height;
     int currentIndex = 0;
     ArrayList<double[]> trail = new ArrayList<double[]>();
+    LinkedList<TrailParticle> trail2 =  new LinkedList<TrailParticle>();
     Color c;
     Color [] colors = new Color [255];
    
@@ -224,6 +226,13 @@ public class PhysicsObject {
     }
 
 
+    public int compareTo(DrawPoint test) {
+        if(getZdepth()<test.getZdepth())
+            return 1;
+        else
+            return -1;
+    }
+
     public double getX() {
         return x;
     }
@@ -282,5 +291,10 @@ public class PhysicsObject {
 
     public void setMass(double mass) {
         this.mass = mass;
+    }
+
+    public double getZdepth()
+    {
+        return z*-1+width/2;
     }
 }//class physicsObject
