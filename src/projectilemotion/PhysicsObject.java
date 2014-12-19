@@ -69,50 +69,22 @@ public class PhysicsObject implements DrawPoint{
         this.yRadian = yradian;
         this.zRadian = zradian;
 
-        double ind = trail.size()+25;
-        
-        for (int index = trail.size()-1; index >=0 ; index--) {
-            double xc = 255 - Math.abs(trail.get(index)[0] / 3);
-            double yc = 255 - Math.abs(trail.get(index)[1] / 3);
-            double zc = 255 - Math.abs(trail.get(index)[2] / 3);
 
-            if (xc < 0) {
-                xc = 0;
-            }
-            if (yc < 0) {
-                yc = 0;
-            }
-            if (zc < 0) {
-                zc = 0;
-            }
-
-            xc /= 255;
-            yc /= 255;
-            zc /= 255;
-
-            zc =  xc * xc  * yc * yc ;
-            zc *= 254;
-            zc = Math.abs(zc);
-
-            double[] temp = yRotation(xRotation(zRotation(trail.get(index))));
-            //double [] temp  = trail.get(index).clone();
+            double[] temp = {x,y,z};
+            temp = ViewTransformations.zRotation(temp, zradian);
+            temp = ViewTransformations.xRotation(temp, xradian);
+            temp = ViewTransformations.yRotation(temp, yradian);
             
             temp[2] = temp[2]*-1+width/2;
             double d0 = width;
             double viewSize;
-            viewSize = d0/(d0+2/Math.atan(1.047+zoom)*temp[2]);
- 
-            viewSize = 1;
-            temp[0]*= viewSize;
-            temp[1]*= viewSize;
+            viewSize = ViewTransformations.perspectiveAdjustment(zoom,temp[2]);
+            temp[0]*= viewSize*10;
+            temp[1]*= viewSize*10;
             temp[0]+=width/2;
             temp[1]+=height/2;
-                ind--;
+            window.fillRect((int) (x), (int) (y),(int) 1,(int) 1);
 
-
-            PhysicsProjectile.drawMap.add(new DrawRequest(temp[0],temp[1],
-                    temp[2],viewSize*10,(int)(254/(ind/25)) ));
-        }
     }
 
 

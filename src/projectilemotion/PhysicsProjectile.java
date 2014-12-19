@@ -85,9 +85,6 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         graphToBack.fillRect(0, 0, width, height);
 
 
-
-
-
         //adds the drawRequests for eacht of the particles
         for (int x = 0; x < list.size(); x++) {
             list.get(x).draw(graphToBack, xRadian, yRadian, zRadian,zoom);
