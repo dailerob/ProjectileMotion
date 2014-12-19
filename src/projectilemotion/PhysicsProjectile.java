@@ -53,7 +53,6 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
 
     public PhysicsProjectile(int width, int hieght)
     {
-        DrawRequest.initialize();
         this.width = width;
         this.height = hieght;
         keys = new boolean[4];
