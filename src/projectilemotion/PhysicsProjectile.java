@@ -19,6 +19,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.PriorityQueue;
 
@@ -33,7 +34,6 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     private double yRadian;
     private double zRadian;
     private double zoom;
-    public static PriorityQueue<DrawRequest> drawMap =  new PriorityQueue<DrawRequest>();
     public static PriorityQueue<DrawPoint> depthMap = new PriorityQueue<DrawPoint>();
     double on = 1;
     Random rand = new Random();
@@ -94,18 +94,17 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         for(int x = 0; x< list.size(); x++)
         {
             depthMap.add(list.get(x));
+            LinkedList<TrailParticle> trailParticles = list.get(x).getTrailParticles();
+            for(TrailParticle index: trailParticles)
+            {
+                depthMap.add(index);
+            }
             list.get(x).step(1000);
         }
 
         while(depthMap.size()>0)
         {
             depthMap.poll().draw(graphToBack,xRadian,yRadian,zRadian,zoom);
-        }
-
-
-        while(drawMap.size()>0)
-        {
-            drawMap.poll().draw(graphToBack);
         }
 
         //adds the forces of each of the particles onto eachother.

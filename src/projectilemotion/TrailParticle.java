@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class TrailParticle implements DrawPoint{
+public class TrailParticle implements DrawPoint, Comparable<DrawPoint>{
 
 
     private double x;
@@ -52,11 +52,12 @@ public class TrailParticle implements DrawPoint{
         double d0 = width;
         double viewSize;
         viewSize = ViewTransformations.perspectiveAdjustment(zoom,temp[2]);
-        temp[0]*= viewSize*10;
-        temp[1]*= viewSize*10;
+        temp[0]*= viewSize;
+        temp[1]*= viewSize;
         temp[0]+=width/2;
         temp[1]+=height/2;
-        window.fillRect((int) (x), (int) (y),(int) 1,(int) 1);
+        window.setColor(c);
+        window.fillRect((int) temp[0], (int) temp[1],(int) 1,(int) 1);
     }
 
     public double getZdepth()

@@ -7,10 +7,9 @@ package projectilemotion;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class PhysicsObject implements DrawPoint{
+public class PhysicsObject implements DrawPoint, Comparable<DrawPoint> {
 
     private double x;
     private double y;
@@ -25,29 +24,13 @@ public class PhysicsObject implements DrawPoint{
     private static double zRadian;
     private static int width;
     private static int height;
-    int currentIndex = 0;
-    ArrayList<double[]> trail = new ArrayList<double[]>();
-    LinkedList<TrailParticle> trail2 =  new LinkedList<TrailParticle>();
+    LinkedList<TrailParticle> trailParticles =  new LinkedList<TrailParticle>();
     Color c;
     Color [] colors = new Color [255];
    
-    
 
-    public PhysicsObject(double x, double y, double xCom, double yCom, double g, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.xCom = xCom;
-        this.yCom = yCom;
-        mass = g;
-        this.width  = width;
-        this.height = height; 
-        for(int index = 0; index < 100; index++)
-        {
-            trail.add(new double[3]);
-        }
-    }
 
-    public PhysicsObject(double x, double y, double z, double xCom, double yCom, double zCom, double mass, int trailLength, int width, int hight) {
+    public PhysicsObject(double x, double y, double z, double xCom, double yCom, double zCom, double mass, int trailLength, int width, int height) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -56,19 +39,11 @@ public class PhysicsObject implements DrawPoint{
         this.zCom = zCom;
         this.mass = mass;
         this.width  = width;
-        this.height = hight;
+        this.height = height;
         this.trailLength = trailLength;
-        for(int index = 0; index < trailLength; index++)
-        {
-            trail.add(new double[3]);
-        }
     }
 
     public void draw(Graphics window, double xradian, double yradian, double zradian, double zoom) {
-        this.xRadian = xradian;
-        this.yRadian = yradian;
-        this.zRadian = zradian;
-
 
             double[] temp = {x,y,z};
             temp = ViewTransformations.zRotation(temp, zradian);
@@ -79,52 +54,11 @@ public class PhysicsObject implements DrawPoint{
             double d0 = width;
             double viewSize;
             viewSize = ViewTransformations.perspectiveAdjustment(zoom,temp[2]);
-            temp[0]*= viewSize*10;
-            temp[1]*= viewSize*10;
+            temp[0]*= viewSize;
+            temp[1]*= viewSize;
             temp[0]+=width/2;
             temp[1]+=height/2;
-            window.fillRect((int) (x), (int) (y),(int) 1,(int) 1);
-
-    }
-
-
-    /**
-     *
-     * @param preRotation - the coordinates of the item before the roatation.
-     * @return - the coordinates of the item after the rotation about the xy plane.
-     */
-    private double [] xRotation (double [] preRotation)
-    {
-        double [] rotated = {Math.cos(xRadian)*preRotation[0]+Math.sin(xRadian)
-                *preRotation[2],preRotation[1],Math.cos(xRadian)*preRotation[2]
-                -Math.sin(xRadian)*preRotation[0]};
-        return rotated;
-    }
-
-    /**
-     *
-     * @param preRotation - the coordinates of the item before the roatation.
-     * @return - the coordinates of the item after the rotation about the yz plane.
-     */
-    private double [] yRotation (double [] preRotation)
-    {
-        double [] rotated = {preRotation[0],Math.cos(yRadian)*preRotation[1]
-                +Math.sin(yRadian)*preRotation[2],Math.sin(yRadian)
-                *preRotation[1]-Math.cos(yRadian)*preRotation[2]};
-        return rotated;
-    }
-
-    /**
-     *
-     * @param preRotation - the coordinates of the item before the roatation.
-     * @return - the coordinates of the item after the rotation about the xz plane.
-     */
-    private double [] zRotation (double [] preRotation)
-    {
-        double [] rotated = {Math.cos(zRadian)*preRotation[0]+Math.sin(zRadian)
-                *preRotation[1],Math.cos(zRadian)*preRotation[1]-
-                Math.sin(zRadian)*preRotation[0],preRotation[2]};
-        return rotated;
+            window.fillRect((int) temp[0], (int) temp[1],(int) 1,(int) 1);
     }
 
 
@@ -161,37 +95,21 @@ public class PhysicsObject implements DrawPoint{
      * @param resolution- the resolution of the vector approximations
      */
     public void step(double resolution) {
-
-        if(trail2.size()<trailLength)
-        {
-            trail2.push(new TrailParticle(x,y,z,c,width, height));
-        }
-        else{
-            trail2.push(trail2.pollLast());
-        }
-
+        stepTrail();
         x += xCom / resolution;
         y += yCom / resolution;
         z += zCom / resolution;
-        
-        stepTrail();
     }
 
     //please please plesase please fix this
     private void stepTrail()
     {
-        //todo
-
-
-        if(currentIndex<trail.size()-1)
-            currentIndex++;
-        else
-            currentIndex = 0;
-        trail.get(currentIndex)[0] = x;
-        trail.get(currentIndex)[1] = y;
-        trail.get(currentIndex)[2] = z;
+        trailParticles.push(new TrailParticle(x, y, z, new Color(254, 254, 254), width, height));
+        if(trailParticles.size()>=trailLength)
+        {
+            trailParticles.pollLast();
+        }
     }
-
 
     /**
      *
@@ -279,5 +197,9 @@ public class PhysicsObject implements DrawPoint{
     public double getZdepth()
     {
         return z*-1+width/2;
+    }
+
+    public LinkedList<TrailParticle> getTrailParticles() {
+        return trailParticles;
     }
 }//class physicsObject
