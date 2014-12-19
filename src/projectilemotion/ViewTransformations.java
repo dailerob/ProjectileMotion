@@ -47,6 +47,13 @@ public class ViewTransformations {
         return rotated;
     }
 
+    /**
+     *
+     * @param zoom - the amount to increase or decrease the camera angle
+     * @param zDepth - the depth of the particles within the sim
+     * @param width - the width of the frame
+     * @return - the adjustment to the position of the particle
+     */
     static double perspectiveAdjustment(double zoom, double zDepth, int width){
         return width/(width+2/Math.atan(1.047+zoom)*zDepth);
     }

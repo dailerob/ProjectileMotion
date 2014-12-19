@@ -35,7 +35,6 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     private double zRadian;
     private double zoom;
     public static PriorityQueue<DrawPoint> depthMap = new PriorityQueue<DrawPoint>();
-    double on = 1;
     Random rand = new Random();
     Color backroundColor = new Color(0,0,0,255);
 
@@ -80,6 +79,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         //we will draw all changes on the background image
         Graphics graphToBack = back.createGraphics();
 
+        //creates backround color
         graphToBack.setColor(backroundColor);
         graphToBack.fillRect(0, 0, width, height);
 
@@ -90,6 +90,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
             list.get(x).step(1000);
         }
 
+        //adds each of the PhysicsProjectiles and TrailParticles into the depthMap heap
         for(int x = 0; x< list.size(); x++)
         {
             depthMap.add(list.get(x));
@@ -101,13 +102,13 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
             list.get(x).step(1000);
         }
 
+        //pulls elements from the heap and draws them in order of increasing depth
         while(depthMap.size()>0)
         {
             depthMap.poll().draw(graphToBack,xRadian,yRadian,zRadian,zoom);
         }
 
         //adds the forces of each of the particles onto eachother.
-
         for (int x = 0; x < list.size(); x++) {
             for (int check = 0; check < list.size(); check++) {
                 if (check != x) {
@@ -122,6 +123,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         twoDGraph.drawImage(back, null, 0, 0);
     }//paint
 
+    //serves to create actions when keys are pressed
     public void keyPressed(KeyEvent e) {
 
         switch (toUpperCase(e.getKeyChar())) {
@@ -150,8 +152,9 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 decZradian();
                 break;
 
+            //case for adding particles
             case 'R':keys[2] = true;
-
+                //creating an individual particle's setting
                 xCord = rand.nextGaussian()*width/2;
                 yCord = rand.nextGaussian()*height/2;
                 zCord = rand.nextGaussian()*height/2;
@@ -162,10 +165,6 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
                 trailLength = 500;
 
                 list.add(new PhysicsObject(xCord, yCord, zCord, xCom, yCom, zCom, mass, trailLength, width, height));
-                //list.add(new PhysicsObject(0, rand.nextDouble()*width/2*on,0, rand.nextGaussian()*100+1800*-on, 0, rand.nextGaussian()*150, Math.abs(rand.nextGaussian()*1), 500 , width, height));
-                //list.add(new PhysicsObject(0 , 0, 0,0,0, 0 , 1 ,500, width, height));
-
-
                 break;
 
             case 'T':
@@ -182,6 +181,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         }
     }//keyPressed
 
+    //serves to set the keys back to their original states
     public void keyReleased(KeyEvent e) {
         switch (toUpperCase(e.getKeyChar())) {
             case 'A':keys[0] = false;break;
@@ -200,6 +200,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     public void keyTyped(KeyEvent e) {
     }
 
+    //user input variable minipulation
     public void incYradian() {
         yRadian +=.01;
     }
@@ -237,7 +238,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     }
 
 
-    //voodoo majic right here
+    //allows for the constant key listing
     public void run() {
         try {
             while (true) {

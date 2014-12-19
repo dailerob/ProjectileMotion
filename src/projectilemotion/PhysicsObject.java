@@ -19,14 +19,9 @@ public class PhysicsObject implements DrawPoint, Comparable<DrawPoint> {
     private double zCom;
     private double mass;
     private static double trailLength;
-    private static double xRadian;
-    private static double yRadian;
-    private static double zRadian;
     private static int width;
     private static int height;
     LinkedList<TrailParticle> trailParticles =  new LinkedList<TrailParticle>();
-    Color c;
-    Color [] colors = new Color [255];
    
 
 
@@ -43,12 +38,20 @@ public class PhysicsObject implements DrawPoint, Comparable<DrawPoint> {
         this.trailLength = trailLength;
     }
 
-    public void draw(Graphics window, double xradian, double yradian, double zradian, double zoom) {
+    /**
+     *
+     * @param window - the window the particle is drawn on
+     * @param xRadian - the amount the view is rotated along the xy plane
+     * @param yRadian - the amount the view is rotated along the yz plane
+     * @param zRadian - the amount the view is rotated along the xz plane
+     * @param zoom - the amount the camera angle is incrased/decreased
+     */
+    public void draw(Graphics window, double xRadian, double yRadian, double zRadian, double zoom) {
 
             double[] temp = {x,y,z};
-            temp = ViewTransformations.zRotation(temp, zradian);
-            temp = ViewTransformations.xRotation(temp, xradian);
-            temp = ViewTransformations.yRotation(temp, yradian);
+            temp = ViewTransformations.zRotation(temp, zRadian);
+            temp = ViewTransformations.xRotation(temp, xRadian);
+            temp = ViewTransformations.yRotation(temp, yRadian);
             
             temp[2] = temp[2]*-1+width/2;
             double viewSize;
@@ -59,7 +62,6 @@ public class PhysicsObject implements DrawPoint, Comparable<DrawPoint> {
             temp[1]+=height/2;
             window.fillRect((int) temp[0], (int) temp[1],(int) 1,(int) 1);
     }
-
 
     /**\
      *
@@ -90,7 +92,7 @@ public class PhysicsObject implements DrawPoint, Comparable<DrawPoint> {
     }
 
     /**
-     *
+     *Steps the position of the particle, calls Steptrail to add to trail
      * @param resolution- the resolution of the vector approximations
      */
     public void step(double resolution) {
@@ -100,7 +102,9 @@ public class PhysicsObject implements DrawPoint, Comparable<DrawPoint> {
         z += zCom / resolution;
     }
 
-    //please please plesase please fix this
+    /**
+     * creates a trail particle from the previous particle position
+     */
     private void stepTrail()
     {
         trailParticles.push(new TrailParticle(x, y, z, new Color(254, 254, 254), width, height));
@@ -124,7 +128,6 @@ public class PhysicsObject implements DrawPoint, Comparable<DrawPoint> {
         yCom = ((yCom * mass +ycom2*grav2)/2)/(mass +grav2);
         mass +=collideWith.getMass();
     }
-
 
     public int compareTo(DrawPoint test) {
         if(getZdepth()<test.getZdepth())
@@ -179,10 +182,6 @@ public class PhysicsObject implements DrawPoint, Comparable<DrawPoint> {
 
     public void setzCom(double zCom) {
         this.zCom = zCom;
-    }
-
-    public double getYradian() {
-        return yRadian;
     }
     
     public double getMass() {

@@ -42,16 +42,22 @@ public class TrailParticle implements DrawPoint, Comparable<DrawPoint>{
             return -1;
     }
 
-    @Override
+    /**
+     *
+     * @param window - the window the particle is drawn on
+     * @param xradian - the amount the view is rotated along the xy plane
+     * @param yradian - the amount the view is rotated along the yz plane
+     * @param zradian - the amount the view is rotated along the xz plane
+     * @param zoom - the amount the camera angle is incrased/decreased
+     */
     public void draw(Graphics window, double xradian, double yradian, double zradian, double zoom) {
-
 
         age++;
         double[] temp = {x,y,z};
+        //preforms the rotation transformations
         temp = ViewTransformations.zRotation(temp, zradian);
         temp = ViewTransformations.xRotation(temp, xradian);
         temp = ViewTransformations.yRotation(temp, yradian);
-
         temp[2] = temp[2]*-1+width/2;
         double viewSize;
         viewSize = ViewTransformations.perspectiveAdjustment(zoom,temp[2],width);
@@ -63,6 +69,10 @@ public class TrailParticle implements DrawPoint, Comparable<DrawPoint>{
         window.fillRect((int) temp[0], (int) temp[1],(int) 1,(int) 1);
     }
 
+    /**
+     *
+     * @return the depth in the view of the particle
+     */
     public double getZdepth()
     {
         return z*-1+width/2;
