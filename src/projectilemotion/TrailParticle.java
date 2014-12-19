@@ -18,6 +18,7 @@ public class TrailParticle implements DrawPoint, Comparable<DrawPoint>{
     private int width;
     private int height;
     private Color c;
+    private int age;
 
     public TrailParticle (double x, double y, double z, Color c, int width, int height)
     {
@@ -27,6 +28,7 @@ public class TrailParticle implements DrawPoint, Comparable<DrawPoint>{
         this.c = c;
         this.width = width;
         this.height = height;
+        age = 0;
     }
 
 
@@ -43,20 +45,21 @@ public class TrailParticle implements DrawPoint, Comparable<DrawPoint>{
     @Override
     public void draw(Graphics window, double xradian, double yradian, double zradian, double zoom) {
 
+
+        age++;
         double[] temp = {x,y,z};
         temp = ViewTransformations.zRotation(temp, zradian);
         temp = ViewTransformations.xRotation(temp, xradian);
         temp = ViewTransformations.yRotation(temp, yradian);
 
         temp[2] = temp[2]*-1+width/2;
-        double d0 = width;
         double viewSize;
-        viewSize = ViewTransformations.perspectiveAdjustment(zoom,temp[2]);
+        viewSize = ViewTransformations.perspectiveAdjustment(zoom,temp[2],width);
         temp[0]*= viewSize;
         temp[1]*= viewSize;
         temp[0]+=width/2;
         temp[1]+=height/2;
-        window.setColor(c);
+        window.setColor(new Color(0,250-age,250-age));
         window.fillRect((int) temp[0], (int) temp[1],(int) 1,(int) 1);
     }
 

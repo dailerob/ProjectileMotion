@@ -5,12 +5,6 @@ package projectilemotion;
  */
 public class ViewTransformations {
 
-    static int width;
-
-    public ViewTransformations(int width)
-    {
-        this.width = width;
-    }
 
 
 
@@ -53,7 +47,7 @@ public class ViewTransformations {
         return rotated;
     }
 
-    static double perspectiveAdjustment(double zoom, double zDepth){
+    static double perspectiveAdjustment(double zoom, double zDepth, int width){
         return width/(width+2/Math.atan(1.047+zoom)*zDepth);
     }
 

@@ -51,9 +51,8 @@ public class PhysicsObject implements DrawPoint, Comparable<DrawPoint> {
             temp = ViewTransformations.yRotation(temp, yradian);
             
             temp[2] = temp[2]*-1+width/2;
-            double d0 = width;
             double viewSize;
-            viewSize = ViewTransformations.perspectiveAdjustment(zoom,temp[2]);
+            viewSize = ViewTransformations.perspectiveAdjustment(zoom,temp[2],width);
             temp[0]*= viewSize;
             temp[1]*= viewSize;
             temp[0]+=width/2;
