@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Roberto Dailey, 2015
+ *
+ * Class for running project
  */
 
 package projectilemotion;
@@ -19,7 +19,7 @@ public class PhysicsTimeStep extends JFrame
 		super("Phyics");
 		setSize(WIDTH,HEIGHT);
 		
-		PhysicsProjectile game = new PhysicsProjectile(WIDTH, HEIGHT);
+		PhysicsEngine game = new PhysicsEngine(WIDTH, HEIGHT);
 		
 		((Component)game).setFocusable(true);			
 		getContentPane().add(game);

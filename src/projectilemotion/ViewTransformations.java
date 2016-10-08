@@ -2,6 +2,8 @@ package projectilemotion;
 
 /**
  * Created by Roberto on 12/18/2014.
+ *
+ * This class acts to preform the view transfomations
  */
 public class ViewTransformations {
 

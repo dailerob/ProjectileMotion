@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Roberto Dailey, 2015
  */
 
 package projectilemotion;
@@ -23,8 +21,9 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.PriorityQueue;
 
-public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
+public class PhysicsEngine extends Canvas implements KeyListener, Runnable
 {
+    //window and engine settings
     private ArrayList<PhysicsObject> list = new ArrayList<PhysicsObject>();
     private boolean[] keys;
     private BufferedImage back;
@@ -38,19 +37,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
     Random rand = new Random();
     Color backroundColor = new Color(0,0,0,255);
 
-    ///particle settings variables
-    double xCord;
-    double yCord;
-    double zCord;
-    double xCom;
-    double yCom;
-    double zCom;
-    double mass;
-    int trailLength;
-
-
-
-    public PhysicsProjectile(int width, int hieght)
+    public PhysicsEngine(int width, int hieght)
     {
         this.width = width;
         this.height = hieght;
@@ -76,7 +63,7 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         }
 
         //create a graphics reference to the back ground image
-        //we will draw all changes on the background image
+        //draw all changes on the background image
         Graphics graphToBack = back.createGraphics();
 
         //creates backround color
@@ -84,13 +71,13 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
         graphToBack.fillRect(0, 0, width, height);
 
 
-        //adds the drawRequests for eacht of the particles
+        //adds the drawRequests for each of the particles
         for (int x = 0; x < list.size(); x++) {
             list.get(x).draw(graphToBack, xRadian, yRadian, zRadian,zoom);
             list.get(x).step(1000);
         }
 
-        //adds each of the PhysicsProjectiles and TrailParticles into the depthMap heap
+        //adds each of the PhysicsEngines and TrailParticles into the depthMap heap
         for(int x = 0; x< list.size(); x++)
         {
             depthMap.add(list.get(x));
@@ -155,14 +142,14 @@ public class PhysicsProjectile extends Canvas implements KeyListener, Runnable
             //case for adding particles
             case 'R':keys[2] = true;
                 //creating an individual particle's setting
-                xCord = rand.nextGaussian()*width/2;
-                yCord = rand.nextGaussian()*height/2;
-                zCord = rand.nextGaussian()*height/2;
-                xCom = rand.nextGaussian()*10;
-                yCom = rand.nextGaussian()*10;
-                zCom = rand.nextGaussian()*10;
-                mass = 1;
-                trailLength = 500;
+                double xCord = rand.nextGaussian()*width/2;
+                double yCord = rand.nextGaussian()*height/2;
+                double zCord = rand.nextGaussian()*height/2;
+                double xCom = rand.nextGaussian()*10;
+                double yCom = rand.nextGaussian()*10;
+                double zCom = rand.nextGaussian()*10;
+                double mass = 1;
+                int trailLength = 500;
 
                 list.add(new PhysicsObject(xCord, yCord, zCord, xCom, yCom, zCom, mass, trailLength, width, height));
                 break;

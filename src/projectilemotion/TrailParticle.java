@@ -35,8 +35,8 @@ public class TrailParticle implements DrawPoint, Comparable<DrawPoint>{
 
 
     @Override
-    public int compareTo(DrawPoint test) {
-        if(getZdepth()<test.getZdepth())
+    public int compareTo(DrawPoint compareison) {
+        if(getZdepth()<compareison.getZdepth())
             return 1;
         else
             return -1;
